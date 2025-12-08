@@ -1,0 +1,15 @@
+{
+  "url": "{{base.url}}",
+
+  "headers": {
+    "X-Api-Key": "{{api-key}}",
+    "Content-Type": "application/json"
+  },
+  "body": {
+    "address": "Argentina, Corriente, Neuquen 123",
+    "email": "clientx@example.com",
+    "name": "{{name-client}}",
+    "note": "This is a sample note for the client."
+  },
+  "endpoint": "/v1/workspaces/{{id-workspace}}/clients"
+}
