@@ -2,6 +2,7 @@ package ar.steps;
 
 import api.config.EntityConfiguration;
 import com.crowdar.core.PageSteps;
+import com.crowdar.core.PropertyManager;
 import io.cucumber.java.en.*;
 import com.google.api.client.repackaged.com.google.common.base.Splitter;
 import cucumber.api.java.en.When;
@@ -15,7 +16,7 @@ public class CommonSteps extends PageSteps {
 
     @Given("^An account created in Clockify and x-api-key generated$")
     public static void AnAccountCreatedInClockifyAndTokenGenerated(){
-        BaseService.X_API_KEY.set(System.getenv("CLOCKIFY_API_KEY"));
+        BaseService.X_API_KEY.set(PropertyManager.getProperty("clockify.api.key"));
     }
 
     @When("^I perform a '(.*)' to '(.*)' endpoint with the '(.*)' and '(.*)'$")
