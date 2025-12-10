@@ -3,7 +3,7 @@ Feature: Client
   
   @FindClientsWorkspace
   Scenario Outline: Find clients on workspace
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -12,12 +12,12 @@ Feature: Client
     And I get clients in the Workspace
     
     Examples:
-      | operation | entity | jsonName             | statusCode | nameWorkspace | token                                            |
-      | GET       | CLIENT | findClientsWorkspace | 200        | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity | jsonName             | statusCode | nameWorkspace |
+      | GET       | CLIENT | findClientsWorkspace | 200        | Crowdar       |
   
   @AddNewClient
   Scenario Outline: Add a new client
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -28,12 +28,12 @@ Feature: Client
     
     
     Examples:
-      | operation | entity | jsonName  | statusCode | nameWorkspace | nameClient           | token                                            |
-      | POST      | CLIENT | addClient | 201        | Crowdar       | ClienteAutomatizado3 | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity | jsonName  | statusCode | nameWorkspace | nameClient           |
+      | POST      | CLIENT | addClient | 201        | Crowdar       | ClienteAutomatizado3 |
   
   @DeleteClient
   Scenario Outline: Delete client
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -45,7 +45,7 @@ Feature: Client
     And The client '<nameClient>' was successfully removed
     
     Examples:
-      | operation | entity | jsonName     | statusCode | nameWorkspace | nameClient | token                                            |
-      | DELETE    | CLIENT | deleteClient | 200        | Crowdar       | newClient1 | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity | jsonName     | statusCode | nameWorkspace | nameClient |
+      | DELETE    | CLIENT | deleteClient | 200        | Crowdar       | newClient1 |
     
     

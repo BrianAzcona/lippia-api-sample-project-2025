@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class CommonSteps extends PageSteps {
 
-    @Given("^An account created in Clockify and x-api-key '(.*)' generated$")
-    public static void AnAccountCreatedInClockifyAndTokenGenerated(String token){
-        BaseService.X_API_KEY.set(token);
+    @Given("^An account created in Clockify and x-api-key generated$")
+    public static void AnAccountCreatedInClockifyAndTokenGenerated(){
+        BaseService.X_API_KEY.set(System.getenv("CLOCKIFY_API_KEY"));
     }
 
     @When("^I perform a '(.*)' to '(.*)' endpoint with the '(.*)' and '(.*)'$")

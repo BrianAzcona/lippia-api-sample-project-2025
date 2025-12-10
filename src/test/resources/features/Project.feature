@@ -3,7 +3,7 @@ Feature: Project
   
   @GetAllProjectsWorkspace
   Scenario Outline: Get all projects on workspace
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -11,12 +11,12 @@ Feature: Project
     Then status code <statusCode> is obtained
     
     Examples:
-      | operation | entity  | jsonName       | statusCode | nameWorkspace | token                                            |
-      | GET       | PROJECT | getAllProjects | 200        | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity  | jsonName       | statusCode | nameWorkspace |
+      | GET       | PROJECT | getAllProjects | 200        | Crowdar       |
   
   @AddNewProject
   Scenario Outline: Add new project
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -26,13 +26,13 @@ Feature: Project
     And The project created has the name '<projectName>'
     
     Examples:
-      | operation | entity  | jsonName   | statusCode | projectName           | nameWorkspace | token                                            |
-      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado1 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity  | jsonName   | statusCode | projectName           | nameWorkspace |
+      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado1 | Crowdar       |
   
   
   @DeleteProject
   Scenario Outline: Delete project from workspace
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -46,12 +46,12 @@ Feature: Project
     And The project '<nameProject>' is successfully eliminated
     
     Examples:
-      | operation | entity  | jsonName      | statusCode | nameProject           | nameWorkspace | token                                            |
-      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado1 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity  | jsonName      | statusCode | nameProject           | nameWorkspace |
+      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado1 | Crowdar       |
   
   @GetFindProjectByID
   Scenario Outline: Find project by ID
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -64,12 +64,12 @@ Feature: Project
     
     
     Examples:
-      | nameProject           | entity  | operation | jsonName         | statusCode | nameWorkspace | token                                            |
-      | ProyectoModificado2 | PROJECT | GET       | getFindProjectID | 200        | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | nameProject         | entity  | operation | jsonName         | statusCode | nameWorkspace |
+      | ProyectoModificado2 | PROJECT | GET       | getFindProjectID | 200        | Crowdar       |
   
   @UpdateProjectWorkspace
   Scenario Outline: Update project on workspace
-    Given An account created in Clockify and x-api-key '<token>' generated
+    Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
@@ -84,7 +84,7 @@ Feature: Project
     
     
     Examples:
-      | entity  | operation | jsonName      | statusCode | nameWorkspace | nameProjectActual     | nameReplace           | token                                            |
-      | PROJECT | PUT       | updateProject | 200        | Crowdar       | ProjectoAutomatizado5 | ProjectoAutomatizado6 | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | entity  | operation | jsonName      | statusCode | nameWorkspace | nameProjectActual     | nameReplace           |
+      | PROJECT | PUT       | updateProject | 200        | Crowdar       | ProjectoAutomatizado5 | ProjectoAutomatizado6 |
       
       
