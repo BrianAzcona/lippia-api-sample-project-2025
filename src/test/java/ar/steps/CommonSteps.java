@@ -41,8 +41,8 @@ public class CommonSteps extends PageSteps {
         return parameters;
     }
 
-    @And("Obtengo los datos de mi Workspace")
-    public void obtengoLosDatosDeMiWorkspace() {
+    @And("I get the data from my Workspace")
+    public void IGetTheDataFromMyWorkspace() {
         WorkspaceValidator.validate();
     }
 
@@ -58,8 +58,8 @@ public class CommonSteps extends PageSteps {
         ClientValidator.validateNameInList(p_nameClient);
     }
 
-    @And("^I get the workspaceId at the position '(.*)'$")
-    public void obtengoElIdEnLaPosicion(int p_indice) {
-        WorkspaceService.defineWorkspaceId(p_indice);
+    @And("^I get the workspaceId with name '(.*)'$")
+    public void IGetTheWorkspaceIdWithName(String p_nameWorkspace) {
+        WorkspaceService.defineWorkspaceId(p_nameWorkspace);
     }
 }

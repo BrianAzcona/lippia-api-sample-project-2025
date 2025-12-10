@@ -6,7 +6,7 @@ Feature: Workspace
     Given An account created in Clockify and x-api-key '<token>' generated
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
-    And Obtengo los datos de mi Workspace
+    And I get the data from my Workspace
     
     Examples:
       | operation | entity    | jsonName         | statusCode | token                                            |

@@ -6,28 +6,28 @@ Feature: Project
     Given An account created in Clockify and x-api-key '<token>' generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
-    And I get the workspaceId at the position '<index>'
+    And I get the workspaceId with name '<nameWorkspace>'
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     
     Examples:
-      | operation | entity  | jsonName       | statusCode | index | token                                            |
-      | GET       | PROJECT | getAllProjects | 201        | 0     | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity  | jsonName       | statusCode | nameWorkspace | token                                            |
+      | GET       | PROJECT | getAllProjects | 200        | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
   
   @AddNewProject
   Scenario Outline: Add new project
     Given An account created in Clockify and x-api-key '<token>' generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
-    And I get the workspaceId at the position '<index>'
+    And I get the workspaceId with name '<nameWorkspace>'
     And I have the name available '<projectName>'
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     And The project created has the name '<projectName>'
     
     Examples:
-      | operation | entity  | jsonName   | statusCode | projectName           | index | token                                            |
-      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado5 | 0     | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity  | jsonName   | statusCode | projectName           | nameWorkspace | token                                            |
+      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado5 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
   
   
   @DeleteProject
@@ -35,7 +35,7 @@ Feature: Project
     Given An account created in Clockify and x-api-key '<token>' generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
-    And I get the workspaceId at the position '<index>'
+    And I get the workspaceId with name '<nameWorkspace>'
     And I perform a 'GET' to 'PROJECT' endpoint with the 'getAllProjects' and ''
     And status code 200 is obtained
     And I get the project ID '<nameProject>'
@@ -46,15 +46,15 @@ Feature: Project
     And The project '<nameProject>' is successfully eliminated
     
     Examples:
-      | operation | entity  | jsonName      | statusCode | nameProject         | index | token                                            |
-      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado6 | 0     | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | operation | entity  | jsonName      | statusCode | nameProject           | nameWorkspace | token                                            |
+      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado6 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
   
   @GetFindProjectByID
   Scenario Outline: Find project by ID
     Given An account created in Clockify and x-api-key '<token>' generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
-    And I get the workspaceId at the position '<index>'
+    And I get the workspaceId with name '<nameWorkspace>'
     And I perform a 'GET' to 'PROJECT' endpoint with the 'getAllProjects' and ''
     And status code 200 is obtained
     And I get the project ID '<nameProject>'
@@ -64,15 +64,15 @@ Feature: Project
     
     
     Examples:
-      | nameProject           | entity  | operation | jsonName         | statusCode | index | token                                            |
-      | ProjectoAutomatizado5 | PROJECT | GET       | getFindProjectID | 200        | 0     | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | nameProject           | entity  | operation | jsonName         | statusCode | nameWorkspace | token                                            |
+      | ProjectoAutomatizado5 | PROJECT | GET       | getFindProjectID | 200        | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
   
   @UpdateProjectWorkspace
   Scenario Outline: Update project on workspace
     Given An account created in Clockify and x-api-key '<token>' generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
-    And I get the workspaceId at the position '<index>'
+    And I get the workspaceId with name '<nameWorkspace>'
     And I perform a 'GET' to 'PROJECT' endpoint with the 'getAllProjects' and ''
     And status code 200 is obtained
     And I get the project ID '<nameProjectActual>'
@@ -84,7 +84,7 @@ Feature: Project
     
     
     Examples:
-      | entity  | operation | jsonName      | statusCode | index | nameProjectActual     | nameReplace           | token                                            |
-      | PROJECT | PUT       | updateProject | 200        | 0     | ProjectoAutomatizado5 | ProjectoAutomatizado6 | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | entity  | operation | jsonName      | statusCode | nameWorkspace | nameProjectActual     | nameReplace           | token                                            |
+      | PROJECT | PUT       | updateProject | 200        | Crowdar       | ProjectoAutomatizado5 | ProjectoAutomatizado6 | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
       
       

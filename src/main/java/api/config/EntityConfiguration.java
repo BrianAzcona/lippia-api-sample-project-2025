@@ -13,6 +13,7 @@ public enum EntityConfiguration {
             return UserService.class;
         }
     },
+
     WORKSPACE {
         @Override
         public Class<?> getEntityService() {

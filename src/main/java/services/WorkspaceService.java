@@ -4,6 +4,7 @@ import api.model.workspace.WorkspacesResponse;
 import com.crowdar.api.rest.APIManager;
 import com.crowdar.api.rest.Response;
 import com.crowdar.core.PropertyManager;
+import junit.framework.Assert;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class WorkspaceService extends BaseService{
         return get(jsonName, WorkspacesResponse[].class,setParams());
     }
 
+
     private static Map<String, String> setParams() {
         Map<String, String> params = new HashMap<String, String>();
         params.put("base.url", PropertyManager.getProperty("base.api.url"));
@@ -21,8 +23,14 @@ public class WorkspaceService extends BaseService{
         return params;
     }
 
-    public static void defineWorkspaceId(int indice){
+    public static void defineWorkspaceId(String p_nameWorkspace){
         WorkspacesResponse[] workspacesResponses = (WorkspacesResponse[]) APIManager.getLastResponse().getResponse();
-        WORKSPACE_ID.set(workspacesResponses[indice].getId());
+        for (WorkspacesResponse workspace : workspacesResponses){
+            if (p_nameWorkspace.equalsIgnoreCase(workspace.getName())){
+                WORKSPACE_ID.set(workspace.getId());
+                return;
+            }
+        }
+        Assert.fail("No se encontró el id del workspace: " + p_nameWorkspace);
     }
 }
