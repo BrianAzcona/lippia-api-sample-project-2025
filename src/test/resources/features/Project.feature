@@ -20,10 +20,17 @@ Feature: Project
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
-    And I have the name available '<projectName>'
+    And I have the name of the new project available '<projectName>'
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     And The project created has the name '<projectName>'
+    And I perform a 'GET' to 'PROJECTS' endpoint with the 'getAllProjects' and ''
+    And status code 200 is obtained
+    And I get the project ID '<projectName>'
+    And I perform a 'PUT' to 'PROJECT' endpoint with the 'updateProjectArchived' and ''
+    And status code 200 is obtained
+    And I perform a 'DELETE' to 'PROJECT' endpoint with the 'deleteProject' and ''
+    And status code 200 is obtained
     
     
     Examples:
@@ -37,6 +44,9 @@ Feature: Project
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
+    And I have the name of the new project available '<nameProject>'
+    And I perform a 'POST' to 'PROJECT' endpoint with the 'addProject' and ''
+    And status code 201 is obtained
     And I perform a 'GET' to 'PROJECTS' endpoint with the 'getAllProjects' and ''
     And status code 200 is obtained
     And I get the project ID '<nameProject>'

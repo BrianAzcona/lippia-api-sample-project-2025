@@ -9,7 +9,7 @@ import services.ProjectsService;
 
 public class ProjectSteps extends PageSteps {
 
-    @And("I have the name available '(.*)'")
+    @And("I have the name of the new project available '(.*)'")
     public void tengoDisponibleElNombre(String p_nameProject) {
         BaseService.NAME_PROJECT.set(p_nameProject);
     }
