@@ -27,7 +27,7 @@ Feature: Project
     
     Examples:
       | operation | entity  | jsonName   | statusCode | projectName           | nameWorkspace | token                                            |
-      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado5 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado1 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
   
   
   @DeleteProject
@@ -47,7 +47,7 @@ Feature: Project
     
     Examples:
       | operation | entity  | jsonName      | statusCode | nameProject           | nameWorkspace | token                                            |
-      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado6 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado1 | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
   
   @GetFindProjectByID
   Scenario Outline: Find project by ID
@@ -65,7 +65,7 @@ Feature: Project
     
     Examples:
       | nameProject           | entity  | operation | jsonName         | statusCode | nameWorkspace | token                                            |
-      | ProjectoAutomatizado5 | PROJECT | GET       | getFindProjectID | 200        | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
+      | ProyectoModificado2 | PROJECT | GET       | getFindProjectID | 200        | Crowdar       | Y2MwOTE0OTYtMWVjNC00ZDdhLTkzYWYtZmE5Mjc1Yjc4ZGZj |
   
   @UpdateProjectWorkspace
   Scenario Outline: Update project on workspace

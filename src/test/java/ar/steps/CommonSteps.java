@@ -1,15 +1,12 @@
 package ar.steps;
 
 import api.config.EntityConfiguration;
-import ar.validator.ClientValidator;
-import ar.validator.WorkspaceValidator;
 import com.crowdar.core.PageSteps;
 import io.cucumber.java.en.*;
 import com.google.api.client.repackaged.com.google.common.base.Splitter;
 import cucumber.api.java.en.When;
 import org.apache.commons.lang.StringUtils;
 import services.BaseService;
-import services.WorkspaceService;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
@@ -41,25 +38,5 @@ public class CommonSteps extends PageSteps {
         return parameters;
     }
 
-    @And("I get the data from my Workspace")
-    public void IGetTheDataFromMyWorkspace() {
-        WorkspaceValidator.validate();
-    }
 
-    @And("^tengo un nombre de cliente '(.*)'$")
-    public void tengoUnNombreDeCliente() {
-
-    }
-
-
-
-    @And("^tengo un cliente con el nombre (.*)$")
-    public void tengoUnClienteConElNombreName(String p_nameClient) {
-        ClientValidator.validateNameInList(p_nameClient);
-    }
-
-    @And("^I get the workspaceId with name '(.*)'$")
-    public void IGetTheWorkspaceIdWithName(String p_nameWorkspace) {
-        WorkspaceService.defineWorkspaceId(p_nameWorkspace);
-    }
 }

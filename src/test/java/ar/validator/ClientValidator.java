@@ -2,9 +2,7 @@ package ar.validator;
 
 import api.model.client.ClientResponse;
 import com.crowdar.api.rest.APIManager;
-import io.cucumber.java.bs.A;
 import junit.framework.Assert;
-import services.BaseService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
