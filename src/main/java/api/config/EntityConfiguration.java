@@ -1,9 +1,6 @@
 package api.config;
 
-import services.ClientService;
-import services.ProjectService;
-import services.UserService;
-import services.WorkspaceService;
+import services.*;
 
 public enum EntityConfiguration {
 
@@ -29,6 +26,11 @@ public enum EntityConfiguration {
     PROJECT {
         @Override
         public Class<?> getEntityService() {return ProjectService.class;
+        }
+    },
+    PROJECTS {
+        @Override
+        public Class<?> getEntityService() {return ProjectsService.class;
         }
     };
 

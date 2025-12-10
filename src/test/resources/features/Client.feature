@@ -46,6 +46,6 @@ Feature: Client
     
     Examples:
       | operation | entity | jsonName     | statusCode | nameWorkspace | nameClient |
-      | DELETE    | CLIENT | deleteClient | 200        | Crowdar       | newClient1 |
+      | DELETE    | CLIENT | deleteClient | 200        | Crowdar       | ClienteAutomatizado3 |
     
     

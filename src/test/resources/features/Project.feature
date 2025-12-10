@@ -11,8 +11,8 @@ Feature: Project
     Then status code <statusCode> is obtained
     
     Examples:
-      | operation | entity  | jsonName       | statusCode | nameWorkspace |
-      | GET       | PROJECT | getAllProjects | 200        | Crowdar       |
+      | operation | entity   | jsonName       | statusCode | nameWorkspace |
+      | GET       | PROJECTS | getAllProjects | 200        | Crowdar       |
   
   @AddNewProject
   Scenario Outline: Add new project
@@ -25,9 +25,10 @@ Feature: Project
     Then status code <statusCode> is obtained
     And The project created has the name '<projectName>'
     
+    
     Examples:
       | operation | entity  | jsonName   | statusCode | projectName           | nameWorkspace |
-      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado1 | Crowdar       |
+      | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado9 | Crowdar       |
   
   
   @DeleteProject
@@ -36,7 +37,7 @@ Feature: Project
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
-    And I perform a 'GET' to 'PROJECT' endpoint with the 'getAllProjects' and ''
+    And I perform a 'GET' to 'PROJECTS' endpoint with the 'getAllProjects' and ''
     And status code 200 is obtained
     And I get the project ID '<nameProject>'
     And I perform a 'PUT' to 'PROJECT' endpoint with the 'updateProjectArchived' and ''
@@ -47,7 +48,7 @@ Feature: Project
     
     Examples:
       | operation | entity  | jsonName      | statusCode | nameProject           | nameWorkspace |
-      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado1 | Crowdar       |
+      | DELETE    | PROJECT | deleteProject | 200        | ProjectoAutomatizado9 | Crowdar       |
   
   @GetFindProjectByID
   Scenario Outline: Find project by ID
@@ -55,7 +56,7 @@ Feature: Project
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
-    And I perform a 'GET' to 'PROJECT' endpoint with the 'getAllProjects' and ''
+    And I perform a 'GET' to 'PROJECTS' endpoint with the 'getAllProjects' and ''
     And status code 200 is obtained
     And I get the project ID '<nameProject>'
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
@@ -64,8 +65,8 @@ Feature: Project
     
     
     Examples:
-      | nameProject         | entity  | operation | jsonName         | statusCode | nameWorkspace |
-      | ProyectoModificado2 | PROJECT | GET       | getFindProjectID | 200        | Crowdar       |
+      | nameProject           | entity  | operation | jsonName         | statusCode | nameWorkspace |
+      | ProjectoAutomatizado6 | PROJECT | GET       | getFindProjectID | 200        | Crowdar       |
   
   @UpdateProjectWorkspace
   Scenario Outline: Update project on workspace
@@ -73,7 +74,7 @@ Feature: Project
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
     And status code 200 is obtained
     And I get the workspaceId with name '<nameWorkspace>'
-    And I perform a 'GET' to 'PROJECT' endpoint with the 'getAllProjects' and ''
+    And I perform a 'GET' to 'PROJECTS' endpoint with the 'getAllProjects' and ''
     And status code 200 is obtained
     And I get the project ID '<nameProjectActual>'
     And I replaced the project name with '<nameReplace>'
@@ -84,7 +85,7 @@ Feature: Project
     
     
     Examples:
-      | entity  | operation | jsonName      | statusCode | nameWorkspace | nameProjectActual     | nameReplace           |
-      | PROJECT | PUT       | updateProject | 200        | Crowdar       | ProjectoAutomatizado5 | ProjectoAutomatizado6 |
+      | entity  | operation | jsonName      | statusCode | nameWorkspace | nameProjectActual   | nameReplace           |
+      | PROJECT | PUT       | updateProject | 200        | Crowdar       | ProyectoModificado2 | ProjectoAutomatizado6 |
       
       

@@ -1,4 +1,4 @@
-package api.model.project;
+package api.model.project; 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
-public class ProjectResponse {
+public class ProjectsResponse {
     public String id;
     public String name;
     public HourlyRate hourlyRate;
@@ -25,7 +25,7 @@ public class ProjectResponse {
     public TimeEstimate timeEstimate;
     public Object budgetEstimate;
     public Object estimateReset;
-    @JsonProperty("public")
+    @JsonProperty("public") 
     public boolean mypublic;
     public boolean template;
 }

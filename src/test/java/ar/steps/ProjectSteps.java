@@ -5,6 +5,7 @@ import com.crowdar.core.PageSteps;
 import io.cucumber.java.en.And;
 import services.BaseService;
 import services.ProjectService;
+import services.ProjectsService;
 
 public class ProjectSteps extends PageSteps {
 
@@ -20,7 +21,7 @@ public class ProjectSteps extends PageSteps {
 
     @And("^I get the project ID '(.*)'$")
     public void obtengoElIdDelProyectoNameProject(String p_nameProject) {
-        ProjectService.defineProjectId(p_nameProject);
+        ProjectsService.defineProjectId(p_nameProject);
 
     }
 
