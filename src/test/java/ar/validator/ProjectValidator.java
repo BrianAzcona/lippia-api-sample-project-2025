@@ -4,6 +4,7 @@ import api.model.project.ProjectResponse;
 import api.model.project.ProjectsResponse;
 import com.crowdar.api.rest.APIManager;
 import junit.framework.Assert;
+import services.BaseService;
 
 public class ProjectValidator {
     public static void validateNameProjectCreated(String p_nameProject){
@@ -18,12 +19,14 @@ public class ProjectValidator {
     }
     public static void ValidateProjectNameReplace(String p_nameProjectReplace){
         ProjectsResponse response = (ProjectsResponse)APIManager.getLastResponse().getResponse();
+
         Assert.assertEquals("el nombre del projecto no fue reemplazado por" + p_nameProjectReplace, p_nameProjectReplace, response.name);
     }
 
-    public static void ValidateProjectDelete(String p_nameProject){
+    public static void ValidateProjectDelete(){
         ProjectsResponse response = (ProjectsResponse)APIManager.getLastResponse().getResponse();
-        Assert.assertEquals("El proyecto " + p_nameProject + " no fue eliminado", p_nameProject, response.name);
+        System.out.println("ESTE NOMBRE VIENE DEL RESPONSE " + response.name);
+        Assert.assertEquals("El proyecto  no fue eliminado", BaseService.NAME_PROJECT.get(), response.name);
     }
 
 

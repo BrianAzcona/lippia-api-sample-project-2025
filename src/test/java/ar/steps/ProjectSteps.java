@@ -4,7 +4,6 @@ import ar.validator.ProjectValidator;
 import com.crowdar.core.PageSteps;
 import io.cucumber.java.en.And;
 import services.BaseService;
-import services.ProjectService;
 import services.ProjectsService;
 
 public class ProjectSteps extends PageSteps {
@@ -32,7 +31,7 @@ public class ProjectSteps extends PageSteps {
 
     @And("^I replaced the project name with '(.*)'$")
     public void reemplazoElNombreDelProyectoPorNameReplace(String p_nameProject) {
-        BaseService.NAME_PROJECT_REPLACE.set(p_nameProject);
+        BaseService.NAME_PROJECT.set(p_nameProject);
     }
 
     @And("^The project name was successfully replaced by '(.*)'$")
@@ -40,8 +39,9 @@ public class ProjectSteps extends PageSteps {
         ProjectValidator.ValidateProjectNameReplace(p_nameProjectReplace);
     }
 
-    @And("^The project '(.*)' is successfully eliminated$")
-    public void theProjectNameProjectIsSuccessfullyEliminated(String p_nameProject) {
-        ProjectValidator.ValidateProjectDelete(p_nameProject);
+    @And("The project is successfully eliminated")
+    public void theProjectNameProjectIsSuccessfullyEliminated() {
+        ProjectValidator.ValidateProjectDelete();
     }
+
 }

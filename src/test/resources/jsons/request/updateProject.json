@@ -6,7 +6,7 @@
     "Content-Type": "application/json"
   },
   "body": {
-    "name": "{{name-replace}}"
+    "name": "{{name-project}}"
   },
   "endpoint": "/v1/workspaces/{{id-workspace}}/projects/{{project-id}}"
 }
