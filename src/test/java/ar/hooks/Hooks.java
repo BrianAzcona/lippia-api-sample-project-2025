@@ -1,4 +1,5 @@
-package ar.steps;
+package ar.hooks;
+import ar.steps.CommonSteps;
 import com.crowdar.core.PropertyManager;
 import io.cucumber.java.*;
 import org.apache.log4j.Logger;
