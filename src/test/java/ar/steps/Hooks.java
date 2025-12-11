@@ -3,10 +3,7 @@ import com.crowdar.core.PropertyManager;
 import io.cucumber.core.api.Scenario;
 import io.cucumber.java.*;
 import org.apache.log4j.Logger;
-import services.BaseService;
-import services.ProjectService;
-import services.ProjectsService;
-import services.WorkspaceService;
+import services.*;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -19,62 +16,50 @@ public class Hooks {
 
     @Before("@CreateProjectBeforeScenario")
     public void createProjectBeforeScenario() {
-        LOGGER.info("----- Creating PROJECT BEFORE scenario -----");
+        LOGGER.info("Creando PROYECTO ANTES del escenario");
 
         try {
             BaseService.X_API_KEY.set(PropertyManager.getProperty("clockify.api.key"));
 
-            // 1. Crear nombre de proyecto
             int randomNumber = ThreadLocalRandom.current().nextInt(1, 11);
             String projectName = "AutoProject_" + randomNumber;
 
             BaseService.NAME_PROJECT.set(projectName);
+            LOGGER.info("Nombre de proyecto generado: " + projectName);
 
-            LOGGER.info("Generated project name: " + projectName);
-
-            // 2. GET Workspaces
             WorkspaceService.get("request/getAllWorkspaces");
 
-            // 3. Obtener workspaceId (buscando por nombre o tomando el primero)
             WorkspaceService.defineWorkspaceId("Crowdar");
-            // O si querés el primero: WorkspaceService.setFirstWorkspaceId();
+            LOGGER.info("ID del Workspace guardado: " + BaseService.WORKSPACE_ID.get());
 
-            LOGGER.info("Workspace ID stored: " + BaseService.WORKSPACE_ID.get());
-
-            // 4. Crear proyecto (POST)
             ProjectService.post("request/addProject");
+            LOGGER.info("Proyecto creado exitosamente");
 
-            LOGGER.info("Project created successfully");
 
-            // 5. Obtener lista de proyectos
             ProjectsService.get("request/getAllProjects");
 
-            // 6. Buscar ID del proyecto recién creado
             ProjectsService.defineProjectId(projectName);
-
-            LOGGER.info("Project ID stored: " + BaseService.PROJECT_ID.get());
+            LOGGER.info("ID del Proyecto guardado: " + BaseService.PROJECT_ID.get());
 
         } catch (Exception e) {
-            LOGGER.error("Error creating project BEFORE scenario", e);
+            LOGGER.error("Error al crear el proyecto antes del escenario", e);
         }
     }
 
 
     @After("@DeleteProjectAfterScenario")
     public void deleteProjectAfterScenario() {
-        LOGGER.info("----- Cleaning project AFTER scenario -----");
+        LOGGER.info("Eliminando proyecto despues del escenario");
 
-        // 1. Validar que exista un nombre de proyecto creado
         if (BaseService.NAME_PROJECT.get() == null) {
-            LOGGER.warn("No project NAME found, cannot search ID.");
+            LOGGER.warn("No se encontró un nombre de proyecto por el cual buscar el ID");
             return;
         }
 
         String projectName = BaseService.NAME_PROJECT.get();
-        LOGGER.info("Looking for project ID for: " + projectName);
+        LOGGER.info("Buscando ID del proyecto: " + projectName);
 
         try {
-            // 2. Obtener lista de proyectos
             CommonSteps commonSteps = new CommonSteps();
             commonSteps.doRequest(
                     "GET",
@@ -83,29 +68,67 @@ public class Hooks {
                     ""
             );
 
-            // 3. Buscar y guardar el ID
             ProjectsService.defineProjectId(projectName);
 
         } catch (Exception e) {
-            LOGGER.error("Error getting the project ID automatically", e);
+            LOGGER.error("Error al obtener el ID del proyecto", e);
             return;
         }
 
-        // 4. Revisar si el ID fue encontrado
         if (BaseService.PROJECT_ID.get() == null) {
-            LOGGER.warn("Project ID not found, cannot archive/delete.");
+            LOGGER.warn("No se encontró el ID del proyecto y no se puede archivar");
             return;
         }
 
-        LOGGER.info("Project ID found: " + BaseService.PROJECT_ID.get());
+        LOGGER.info("ID del proyecto encontrado: " + BaseService.PROJECT_ID.get());
 
-        // 5. Archivar
         ProjectService.put("request/updateProjectArchived");
-        LOGGER.info("Project archived: " + BaseService.PROJECT_ID.get());
+        LOGGER.info("Proyecto archivado: " + BaseService.PROJECT_ID.get());
 
-        // 6. Eliminar
         ProjectService.delete("request/deleteProject");
-        LOGGER.info("Project deleted: " + BaseService.PROJECT_ID.get());
+        LOGGER.info("Proyecto eliminado: " + BaseService.PROJECT_ID.get());
     }
+
+    @After("@DeleteClientAfterScenario")
+    public void deleteClientAfterScenario() {
+        LOGGER.info("Eliminando Cliente despues del escenario");
+
+        if (BaseService.NAME_CLIENT.get() == null) {
+            LOGGER.warn("No se encontró un nombre de Cliente por el cual buscar el ID");
+            return;
+        }
+
+        String ClientName = BaseService.NAME_CLIENT.get();
+        LOGGER.info("Buscando ID del cliente: " + ClientName);
+
+        try {
+            CommonSteps commonSteps = new CommonSteps();
+            commonSteps.doRequest(
+                    "GET",
+                    "CLIENT",
+                    "findClientsWorkspace",
+                    ""
+            );
+
+            ClientService.getIDClient(ClientName);
+
+        } catch (Exception e) {
+            LOGGER.error("Error al obtener el ID del cliente", e);
+            return;
+        }
+
+        if (BaseService.CLIENT_ID.get() == null) {
+            LOGGER.warn("No se encontró el ID del proyecto y no se puede archivar");
+            return;
+        }
+
+        LOGGER.info("ID del cliente encontrado: " + BaseService.CLIENT_ID.get());
+
+
+        ClientService.delete("request/deleteClient");
+        LOGGER.info("Cliente eliminado: " + BaseService.CLIENT_ID.get());
+    }
+
+
 
 }

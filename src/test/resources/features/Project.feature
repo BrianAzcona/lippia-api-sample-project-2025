@@ -52,17 +52,15 @@ Feature: Project
     
     
     Examples:
-      | nameProject            | entity  | operation | jsonName         | statusCode | nameWorkspace |
+      | nameProject          | entity  | operation | jsonName         | statusCode | nameWorkspace |
       | Software Development | PROJECT | GET       | getFindProjectID | 200        | Crowdar       |
   
   @UpdateProjectWorkspace @CreateProjectBeforeScenario @DeleteProjectAfterScenario
-  Scenario Outline: Update project on workspace
+  Scenario Outline: Update name project on workspace
     Given I replaced the project name with '<nameReplace>'
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     And The project name was successfully replaced by '<nameReplace>'
-    
-    
     
     Examples:
       | entity  | operation | jsonName      | statusCode | nameReplace    |
