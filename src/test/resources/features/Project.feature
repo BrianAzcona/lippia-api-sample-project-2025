@@ -13,7 +13,7 @@ Feature: Project
       | operation | entity   | jsonName       | statusCode | nameWorkspace |
       | GET       | PROJECTS | getAllProjects | 200        | Crowdar       |
   
-  @AddNewProject @DeleteProjectAfterScenario
+  @AddNewProject @DeleteProjectAfter
   Scenario Outline: Add new project
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -28,7 +28,7 @@ Feature: Project
       | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado3 | Crowdar       |
   
   
-  @DeleteProject @CreateProjectBeforeScenario
+  @DeleteProject @AddProjectBefore
   Scenario Outline: Delete project from workspace
     Given I perform a 'PUT' to 'PROJECT' endpoint with the 'updateProjectArchived' and ''
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
@@ -55,7 +55,7 @@ Feature: Project
       | nameProject          | entity  | operation | jsonName         | statusCode | nameWorkspace |
       | Software Development | PROJECT | GET       | getFindProjectID | 200        | Crowdar       |
   
-  @UpdateProjectWorkspace @CreateProjectBeforeScenario @DeleteProjectAfterScenario
+  @UpdateProjectWorkspace @AddProjectBefore @DeleteProjectAfter
   Scenario Outline: Update name project on workspace
     Given I replaced the project name with '<nameReplace>'
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''

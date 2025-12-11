@@ -1,6 +1,5 @@
 package ar.steps;
 import com.crowdar.core.PropertyManager;
-import io.cucumber.core.api.Scenario;
 import io.cucumber.java.*;
 import org.apache.log4j.Logger;
 import services.*;
@@ -12,17 +11,16 @@ public class Hooks {
     private static final Logger LOGGER = Logger.getLogger(Hooks.class);
 
 
-    private Scenario scenario;
 
-    @Before("@CreateProjectBeforeScenario")
-    public void createProjectBeforeScenario() {
+    @Before("@AddProjectBefore")
+    public void AddProjectBefore() {
         LOGGER.info("Creando PROYECTO ANTES del escenario");
 
         try {
             BaseService.X_API_KEY.set(PropertyManager.getProperty("clockify.api.key"));
 
             int randomNumber = ThreadLocalRandom.current().nextInt(1, 11);
-            String projectName = "AutoProject_" + randomNumber;
+            String projectName = "RandomProject_" + randomNumber;
 
             BaseService.NAME_PROJECT.set(projectName);
             LOGGER.info("Nombre de proyecto generado: " + projectName);
@@ -46,9 +44,41 @@ public class Hooks {
         }
     }
 
+    @Before("@AddClientBefore")
+    public void addClientBefore() {
+        LOGGER.info("Creando Cliente antes del escenario");
 
-    @After("@DeleteProjectAfterScenario")
-    public void deleteProjectAfterScenario() {
+        try {
+            BaseService.X_API_KEY.set(PropertyManager.getProperty("clockify.api.key"));
+
+            int randomNumber = ThreadLocalRandom.current().nextInt(1, 11);
+            String clientName = "RandomClient_" + randomNumber;
+
+            BaseService.NAME_CLIENT.set(clientName);
+            LOGGER.info("Nombre de cliente generado: " + clientName);
+
+            WorkspaceService.get("request/getAllWorkspaces");
+
+            WorkspaceService.defineWorkspaceId("Crowdar");
+            LOGGER.info("ID del Workspace guardado: " + BaseService.WORKSPACE_ID.get());
+
+            ClientService.post("request/addClient");
+            LOGGER.info("Cliente creado exitosamente");
+
+
+            ClientService.get("request/findClientsWorkspace");
+
+            ClientService.getIDClient(clientName);
+            LOGGER.info("ID del Cliente guardado: " + BaseService.CLIENT_ID.get());
+
+        } catch (Exception e) {
+            LOGGER.error("Error al crear el proyecto antes del escenario", e);
+        }
+    }
+
+
+    @After("@DeleteProjectAfter")
+    public void deleteProjectAfter() {
         LOGGER.info("Eliminando proyecto despues del escenario");
 
         if (BaseService.NAME_PROJECT.get() == null) {
@@ -89,8 +119,8 @@ public class Hooks {
         LOGGER.info("Proyecto eliminado: " + BaseService.PROJECT_ID.get());
     }
 
-    @After("@DeleteClientAfterScenario")
-    public void deleteClientAfterScenario() {
+    @After("@DeleteClientAfter")
+    public void deleteClientAfter() {
         LOGGER.info("Eliminando Cliente despues del escenario");
 
         if (BaseService.NAME_CLIENT.get() == null) {

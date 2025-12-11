@@ -14,7 +14,7 @@ Feature: Client
       | operation | entity | jsonName             | statusCode | nameWorkspace |
       | GET       | CLIENT | findClientsWorkspace | 200        | Crowdar       |
   
-  @AddNewClient @DeleteClientAfterScenario
+  @AddNewClient @DeleteClientAfter
   Scenario Outline: Add a new client
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -29,19 +29,16 @@ Feature: Client
       | operation | entity | jsonName  | statusCode | nameWorkspace | nameClient           |
       | POST      | CLIENT | addClient | 201        | Crowdar       | ClienteAutomatizado3 |
   
-  @DeleteClient
+  @DeleteClient @AddClientBefore
   Scenario Outline: Delete client
-    Given An account created in Clockify and x-api-key generated
-    And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
-    And I get the workspaceId with name '<nameWorkspace>'
-    And I perform a 'GET' to 'CLIENT' endpoint with the 'findClientsWorkspace' and ''
-    And I get the client ID with the name '<nameClient>'
+    Given I have the client name '<nameClient>'
+    And I perform a 'PUT' to 'CLIENT' endpoint with the 'updateNameClient' and ''
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
     Then status code <statusCode> is obtained
     And The client '<nameClient>' was successfully removed
     
     Examples:
-      | operation | entity | jsonName     | statusCode | nameWorkspace | nameClient |
-      | DELETE    | CLIENT | deleteClient | 200        | Crowdar       | ClienteAutomatizado3 |
+      | operation | entity | jsonName     | statusCode | nameClient           |
+      | DELETE    | CLIENT | deleteClient | 200        | ClienteAutomatizado3 |
     
     

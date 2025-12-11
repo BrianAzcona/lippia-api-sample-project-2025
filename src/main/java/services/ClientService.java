@@ -16,6 +16,7 @@ public class ClientService extends BaseService {
 
     public static Response delete(String jsonName) {return delete(jsonName,ClientResponse.class ,setParams());}
 
+    public static Response put(String jsonName) {return put(jsonName,ClientResponse.class ,setParams());}
 
     private static Map<String, String> setParams() {
         Map<String, String> params = new HashMap<String, String>();

@@ -46,10 +46,6 @@ public class ProjectService extends BaseService {
         if (PROJECT_ID.get() != null && !PROJECT_ID.get().isEmpty()) {
             params.put("project-id", PROJECT_ID.get());
         }
-        /*
-        if (NAME_PROJECT_REPLACE.get() != null && !NAME_PROJECT_REPLACE.get().isEmpty()) {
-            params.put("name-replace", NAME_PROJECT_REPLACE.get());
-        }*/
 
         return params;
     }

@@ -4,7 +4,6 @@ import ar.validator.ClientValidator;
 import com.crowdar.core.PageSteps;
 import io.cucumber.java.en.And;
 import services.BaseService;
-import services.ClientService;
 
 public class ClientSteps extends PageSteps {
 
@@ -21,11 +20,6 @@ public class ClientSteps extends PageSteps {
     @And("^The created client has the name '(.*)'$")
     public void theCreatedClientHasTheName(String p_nameClient) {
         ClientValidator.validateNameClient(p_nameClient);
-    }
-
-    @And("^I get the client ID with the name '(.*)'$")
-    public void iGetTheClientIDWithTheName(String p_nameClient) {
-        ClientService.getIDClient(p_nameClient);
     }
 
     @And("^The client '(.*)' was successfully removed$")

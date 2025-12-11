@@ -9,7 +9,6 @@ public class BaseService extends MethodsService {
     public static ThreadLocal<String> NAME_CLIENT = new ThreadLocal<>();
     public static ThreadLocal<String> NAME_PROJECT = new ThreadLocal<>();
     public static ThreadLocal<String> PROJECT_ID = new ThreadLocal<>();
-    //public static ThreadLocal<String> NAME_PROJECT_REPLACE = new ThreadLocal<>();
 
     public static ThreadLocal<String> CLIENT_ID = new ThreadLocal<>();
 
