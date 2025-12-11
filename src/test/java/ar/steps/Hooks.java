@@ -14,72 +14,52 @@ public class Hooks {
 
     @Before("@AddProjectBefore")
     public void AddProjectBefore() {
-        LOGGER.info("Creando PROYECTO ANTES del escenario");
 
-        try {
             BaseService.X_API_KEY.set(PropertyManager.getProperty("clockify.api.key"));
 
             int randomNumber = ThreadLocalRandom.current().nextInt(1, 11);
             String projectName = "RandomProject_" + randomNumber;
 
             BaseService.NAME_PROJECT.set(projectName);
-            LOGGER.info("Nombre de proyecto generado: " + projectName);
 
             WorkspaceService.get("request/getAllWorkspaces");
 
             WorkspaceService.defineWorkspaceId("Crowdar");
-            LOGGER.info("ID del Workspace guardado: " + BaseService.WORKSPACE_ID.get());
 
             ProjectService.post("request/addProject");
-            LOGGER.info("Proyecto creado exitosamente");
-
 
             ProjectsService.get("request/getAllProjects");
 
             ProjectsService.defineProjectId(projectName);
-            LOGGER.info("ID del Proyecto guardado: " + BaseService.PROJECT_ID.get());
 
-        } catch (Exception e) {
-            LOGGER.error("Error al crear el proyecto antes del escenario", e);
-        }
+
     }
 
     @Before("@AddClientBefore")
     public void addClientBefore() {
-        LOGGER.info("Creando Cliente antes del escenario");
-
-        try {
             BaseService.X_API_KEY.set(PropertyManager.getProperty("clockify.api.key"));
 
             int randomNumber = ThreadLocalRandom.current().nextInt(1, 11);
             String clientName = "RandomClient_" + randomNumber;
 
             BaseService.NAME_CLIENT.set(clientName);
-            LOGGER.info("Nombre de cliente generado: " + clientName);
 
             WorkspaceService.get("request/getAllWorkspaces");
 
             WorkspaceService.defineWorkspaceId("Crowdar");
-            LOGGER.info("ID del Workspace guardado: " + BaseService.WORKSPACE_ID.get());
 
             ClientService.post("request/addClient");
-            LOGGER.info("Cliente creado exitosamente");
-
 
             ClientService.get("request/findClientsWorkspace");
 
             ClientService.getIDClient(clientName);
-            LOGGER.info("ID del Cliente guardado: " + BaseService.CLIENT_ID.get());
 
-        } catch (Exception e) {
-            LOGGER.error("Error al crear el proyecto antes del escenario", e);
-        }
+
     }
 
 
     @After("@DeleteProjectAfter")
     public void deleteProjectAfter() {
-        LOGGER.info("Eliminando proyecto despues del escenario");
 
         if (BaseService.NAME_PROJECT.get() == null) {
             LOGGER.warn("No se encontró un nombre de proyecto por el cual buscar el ID");
@@ -87,7 +67,6 @@ public class Hooks {
         }
 
         String projectName = BaseService.NAME_PROJECT.get();
-        LOGGER.info("Buscando ID del proyecto: " + projectName);
 
         try {
             CommonSteps commonSteps = new CommonSteps();
@@ -109,27 +88,18 @@ public class Hooks {
             LOGGER.warn("No se encontró el ID del proyecto y no se puede archivar");
             return;
         }
-
-        LOGGER.info("ID del proyecto encontrado: " + BaseService.PROJECT_ID.get());
-
         ProjectService.put("request/updateProjectArchived");
-        LOGGER.info("Proyecto archivado: " + BaseService.PROJECT_ID.get());
 
         ProjectService.delete("request/deleteProject");
-        LOGGER.info("Proyecto eliminado: " + BaseService.PROJECT_ID.get());
     }
 
     @After("@DeleteClientAfter")
     public void deleteClientAfter() {
-        LOGGER.info("Eliminando Cliente despues del escenario");
-
         if (BaseService.NAME_CLIENT.get() == null) {
             LOGGER.warn("No se encontró un nombre de Cliente por el cual buscar el ID");
             return;
         }
-
         String ClientName = BaseService.NAME_CLIENT.get();
-        LOGGER.info("Buscando ID del cliente: " + ClientName);
 
         try {
             CommonSteps commonSteps = new CommonSteps();
@@ -152,11 +122,7 @@ public class Hooks {
             return;
         }
 
-        LOGGER.info("ID del cliente encontrado: " + BaseService.CLIENT_ID.get());
-
-
         ClientService.delete("request/deleteClient");
-        LOGGER.info("Cliente eliminado: " + BaseService.CLIENT_ID.get());
     }
 
 
