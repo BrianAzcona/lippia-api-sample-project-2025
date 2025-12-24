@@ -1,36 +1,35 @@
 package services;
 
-import api.model.Data;
-import com.crowdar.api.rest.MethodsService;
+import api.model.user.UserResponse;
+import com.crowdar.api.rest.APIManager;
 import com.crowdar.api.rest.Response;
-import com.crowdar.util.MapUtils;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.crowdar.core.PropertyManager;
+import junit.framework.Assert;
 
+import java.util.HashMap;
 import java.util.Map;
 
-
-public class UserService extends MethodsService {
-
+public class UserService extends BaseService{
     public static Response get(String jsonName) {
-       return get(jsonName, Data.class);
+        return get(jsonName, UserResponse[].class,setParams());
     }
 
-    public static Response delete(String jsonName) {
-        return delete(jsonName, null);
+    private static Map<String, String> setParams() {
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("base.url", PropertyManager.getProperty("base.api.url"));
+        params.put("api-key",X_API_KEY.get());
+        params.put("id-workspace",WORKSPACE_ID.get());
+        return params;
     }
 
-    @Override
-    public void validateFields(Object expected, Object actual, Map<String, String> parameters) throws Exception {
-        Map<String, Object> expectedObjectMapped = MapUtils.convertObjectToMap(expected);
-        Map<String, String> expectedData = (Map<String, String>) expectedObjectMapped.get("data");
-        expectedData.replace("first_name", parameters.get("name"));
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        expected = objectMapper.convertValue(expectedObjectMapped, Object.class);
-
-        validateFields(expected, actual);
+    public static void defineUserId(String p_nameUser){
+        UserResponse[] userResponses = (UserResponse[]) APIManager.getLastResponse().getResponse();
+        for (UserResponse user : userResponses){
+            if (p_nameUser.equalsIgnoreCase(user.getName())){
+                USER_ID.set(user.getId());
+                return;
+            }
+        }
+        Assert.fail("No se encontró el id del workspace: " + p_nameUser);
     }
-
 }
-
-

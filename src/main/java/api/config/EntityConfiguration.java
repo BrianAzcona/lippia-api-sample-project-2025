@@ -4,12 +4,6 @@ import services.*;
 
 public enum EntityConfiguration {
 
-    USER {
-        @Override
-        public Class<?> getEntityService() {
-            return UserService.class;
-        }
-    },
 
     WORKSPACE {
         @Override
@@ -26,6 +20,16 @@ public enum EntityConfiguration {
     PROJECT {
         @Override
         public Class<?> getEntityService() {return ProjectService.class;
+        }
+    },
+    USER {
+        @Override
+        public Class<?> getEntityService() {return UserService.class;
+        }
+    },
+    TIME_ENTRY {
+        @Override
+        public Class<?> getEntityService() {return TimeEntryService.class;
         }
     },
     PROJECTS {
