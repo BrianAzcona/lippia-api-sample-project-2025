@@ -7,9 +7,9 @@
   },
   "body": {
     "start": "2025-12-26T00:00:00-03:00",
-    "end": "2025-12-26T{{hours}}:{{minutes}}:{{seconds}}-03:00",
+    "end": "{{end-old}}",
     "projectId": "{{project-id}}",
     "description": "{{description}}"
   },
-  "endpoint": "/v1/workspaces/{{id-workspace}}/user/{{id-user}}/time-entries"
+  "endpoint": "/v1/workspaces/{{id-workspace}}/time-entries/{{timeEntry-id}}"
 }
