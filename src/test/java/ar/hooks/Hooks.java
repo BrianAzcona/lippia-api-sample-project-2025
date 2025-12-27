@@ -126,6 +126,26 @@ public class Hooks {
         ClientService.delete("request/deleteClient");
     }
 
+    @After("@DeleteTimeEntryAfter")
+    public void deleteTimeEntryAfter() {
+        try {
+            CommonSteps commonSteps = new CommonSteps();
+            commonSteps.doRequest(
+                    "GET",
+                    "TIME_ENTRY",
+                    "getTimeUserWorkspace",
+                    ""
+            );
+
+            TimeEntryService.defineIdTimeEntryWithIdProject();
+
+        } catch (Exception e) {
+            LOGGER.error("Error al obtener el ID de las horas registradas", e);
+            return;
+        }
+        TimeEntryService.delete("request/deleteTimeEntry");
+    }
+
 
 
 }

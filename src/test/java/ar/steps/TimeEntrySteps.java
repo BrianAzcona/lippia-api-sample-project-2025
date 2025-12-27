@@ -1,5 +1,6 @@
 package ar.steps;
 
+import ar.validator.TimeEntryValidator;
 import com.crowdar.core.PageSteps;
 import io.cucumber.java.en.And;
 import services.TimeEntryService;
@@ -20,5 +21,15 @@ public class TimeEntrySteps extends PageSteps {
     @And("^I add new description (.*)$")
     public void iAddNewDescription(String p_description) {
         TimeEntryService.addDescription(p_description);
+    }
+
+    @And("^The description was updated to (.*)$")
+    public void theDescriptionWasUpdatedTo(String p_descripcion) {
+        TimeEntryValidator.validateDescriptionUpdate(p_descripcion);
+    }
+
+    @And("The recorded hours were successfully deleted")
+    public void theRecordedHoursWereSuccessfullyDeleted() {
+        TimeEntryValidator.validateDeleteTimeEntry();
     }
 }
