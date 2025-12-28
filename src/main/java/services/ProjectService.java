@@ -1,17 +1,12 @@
 package services;
 
 
-import api.config.EntityConfiguration;
-import com.google.api.client.repackaged.com.google.common.base.Splitter;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+
 import api.model.project.ProjectResponse;
 import api.model.project.ProjectsResponse;
-import com.crowdar.api.rest.CommonSteps;
 import com.crowdar.api.rest.Response;
 import com.crowdar.core.PropertyManager;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,7 +34,6 @@ public class ProjectService extends BaseService {
         params.put("api-key", X_API_KEY.get());
         params.put("id-workspace",WORKSPACE_ID.get());
 
-        //Esta parte utiliza el parametro si lo necesita
         if (NAME_PROJECT.get() != null && !NAME_PROJECT.get().isEmpty()) {
             params.put("name-project", NAME_PROJECT.get());
         }
