@@ -1,7 +1,7 @@
 @Client
 Feature: Client
   
-  @FindClientsWorkspace
+  @FindClientsWorkspace @Smoke
   Scenario Outline: Find clients on workspace
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -14,7 +14,7 @@ Feature: Client
       | operation | entity | jsonName             | statusCode | nameWorkspace |
       | GET       | CLIENT | findClientsWorkspace | 200        | Crowdar       |
   
-  @AddNewClient @DeleteClientAfter
+  @AddNewClient @DeleteClientAfter @Regression
   Scenario Outline: Add a new client
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -29,7 +29,7 @@ Feature: Client
       | operation | entity | jsonName  | statusCode | nameWorkspace | nameClient           |
       | POST      | CLIENT | addClient | 201        | Crowdar       | ClienteAutomatizado3 |
   
-  @DeleteClient @AddClientBefore
+  @DeleteClient @AddClientBefore @Regression
   Scenario Outline: Delete client
     Given I have the client name '<nameClient>'
     And I perform a 'PUT' to 'CLIENT' endpoint with the 'updateNameClient' and ''

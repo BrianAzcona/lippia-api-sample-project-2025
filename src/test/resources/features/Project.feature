@@ -1,7 +1,7 @@
 @Project
 Feature: Project
   
-  @GetAllProjectsWorkspace
+  @GetAllProjectsWorkspace @Smoke
   Scenario Outline: Get all projects on workspace
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -13,7 +13,7 @@ Feature: Project
       | operation | entity   | jsonName       | statusCode | nameWorkspace |
       | GET       | PROJECTS | getAllProjects | 200        | Crowdar       |
   
-  @AddNewProject @DeleteProjectAfter
+  @AddNewProject @DeleteProjectAfter @Regression
   Scenario Outline: Add new project
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -28,7 +28,7 @@ Feature: Project
       | POST      | PROJECT | addProject | 201        | ProjectoAutomatizado3 | Crowdar       |
   
   
-  @DeleteProject @AddProjectBefore
+  @DeleteProject @AddProjectBefore @Regression
   Scenario Outline: Delete project from workspace
     Given I perform a 'PUT' to 'PROJECT' endpoint with the 'updateProjectArchived' and ''
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''
@@ -39,7 +39,7 @@ Feature: Project
       | operation | entity  | jsonName      | statusCode |
       | DELETE    | PROJECT | deleteProject | 200        |
   
-  @GetFindProjectByID
+  @GetFindProjectByID @Smoke
   Scenario Outline: Find project by ID
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -55,7 +55,7 @@ Feature: Project
       | nameProject          | entity  | operation | jsonName         | statusCode | nameWorkspace |
       | Software Development | PROJECT | GET       | getFindProjectID | 200        | Crowdar       |
   
-  @UpdateProjectWorkspace @AddProjectBefore @DeleteProjectAfter
+  @UpdateProjectWorkspace @AddProjectBefore @DeleteProjectAfter @Regression
   Scenario Outline: Update name project on workspace
     Given I replaced the project name with '<nameReplace>'
     When I perform a '<operation>' to '<entity>' endpoint with the '<jsonName>' and ''

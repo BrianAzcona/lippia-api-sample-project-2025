@@ -1,7 +1,7 @@
 @TimeEntry
 Feature: Time entry
   
-  @GetTimeEntryUserWorkspace
+  @GetTimeEntryUserWorkspace @Smoke
   Scenario Outline: Get time entries for a user on workspace
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -15,7 +15,7 @@ Feature: Time entry
       | nameWorkspace | nameUser      | operation | entity     | jsonName             | statusCode |
       | Crowdar       | brianazcona25 | GET       | TIME_ENTRY | getTimeUserWorkspace | 200        |
   
-  @AddTimeProject @DeleteTimeEntryAfter
+  @AddTimeProject @DeleteTimeEntryAfter @Regression
   Scenario Outline: Add a new time entry
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -32,7 +32,7 @@ Feature: Time entry
       | hours | minutes | seconds | nameWorkspace | nameUser      | nameProject  | operation | entity     | jsonName        | statusCode |
       | 02    | 00      | 00      | Crowdar       | brianazcona25 | pruebaManual | POST      | TIME_ENTRY | addNewTimeEntry | 201        |
   
-  @EditDescriptionTimeRecord @DeleteTimeEntryAfter
+  @EditDescriptionTimeRecord @DeleteTimeEntryAfter @Regression
   Scenario Outline: Edit description in time record
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
@@ -54,7 +54,7 @@ Feature: Time entry
       | hours | minutes | seconds | description                   | nameWorkspace | nameUser      | nameProject  | operation | entity     | jsonName             | statusCode |
       | 02    | 00      | 00      | Esta es una nueva descripcion | Crowdar       | brianazcona25 | pruebaManual | PUT       | TIME_ENTRY | updateFieldTimeEntry | 200        |
   
-  @DeleteRecordedTime
+  @DeleteRecordedTime @Regression
   Scenario Outline: Delete recorded time
     Given An account created in Clockify and x-api-key generated
     And I perform a 'GET' to 'WORKSPACE' endpoint with the 'getAllWorkspaces' and ''
